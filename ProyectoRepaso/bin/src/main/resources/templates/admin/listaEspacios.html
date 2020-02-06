@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title>Usuarios provisionales</title>
+<!-- Required meta tags -->
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<!--Mis estilos-->
+<link rel="stylesheet" href="../../static/css/styles.css"
+	th:href="@{/css/styles.css}" />
+</head>
+<body>
+
+	<div th:replace="Navbar.html :: navbar"></div>
+	<ul class="navbar-nav my-2 my-lg-0">
+		<li><a
+			class="btn btn-dark btn-outline-warning mr-sm-2 mt-2 float-right"
+			th:href="@{/admin/nuevoEspacio}" th:text="#{listEspacios.anyadir}">Añadir espacio</a></li>
+	</ul>
+
+	<div class="row">
+		<div class="col">
+			<h2 th:text="#{listEspacios.espacios}">Espacios disponibles</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th th:text="#{listEspacios.nombre}">Nombre</th>
+						<th th:text="#{listEspacios.centro}">Centro</th>
+						<th th:text="#{listEspacios.alumnos}">Alumnos</th>
+						<th th:text="#{listEspacios.puestos}">Puestos</th>
+						<th th:text="#{listEspacios.operaciones}">Operaciones</th>
+					</tr>
+				</thead>
+				<tr th:each="espacio : ${listaEspacios}">
+					<td th:text="${espacio.nombre}"></td>
+					<td th:text="${espacio.centro.nombre}"></td>
+					<td th:text="${espacio.alumnos}"></td>
+					<td th:text="${espacio.puestos}"></td>
+					<td><a
+						th:href="@{/admin/editarEspacio/{id}(id=${espacio.id})}" th:text="#{listEspacios.editar}">Editar</a>
+						| <a th:href="@{/admin/borrarEspacio/{id}(id=${espacio.id})}"
+						onclick="return confirm('¿ESTÁ SEGURO DE ELIMINAR ESTE ESPACIO?');" th:text="#{listEspacios.eliminar}">Eliminar</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div th:replace="Footer.html :: footer"></div>
+
+
+	<!-- Optional JavaScript -->
+
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>

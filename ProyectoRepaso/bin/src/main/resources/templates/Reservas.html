@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link href="css/" rel="stylesheet" type="text/css" th:href="@{/css/}">
+
+</head>
+<body>
+
+	<div th:replace="Navbar.html :: navbar"></div>
+
+	<table class="table table-dark w-75 mx-auto">
+		<thead>
+			<tr>
+				<th scope="col">Fecha</th>
+				<th scope="col">Espacio</th>
+				<th scope="col">Hora</th>
+
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="reserva:${lista}" th:if="${reserva.fecha!=null}">
+				<td th:text="${reserva.fecha}"></td>
+				<td th:text="${reserva.espacio.nombre}"></td>
+				<td th:text="${reserva.hora}"></td>
+				<td><a th:href="@{/usuario/borrarReserva/{id}(id=${reserva.id})}"><img src="/img/loschen.png"></a></td>
+
+			</tr>
+		</tbody>
+	</table>
+	<div th:replace="Footer.html :: footer"></div>
+</body>
+</html>
